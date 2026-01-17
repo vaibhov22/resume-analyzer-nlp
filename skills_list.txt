@@ -1,0 +1,19 @@
+python
+java
+c++
+sql
+mysql
+mongodb
+flask
+django
+html
+css
+javascript
+react
+node
+machine learning
+data science
+nlp
+git
+github
+linux

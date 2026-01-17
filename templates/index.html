@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<div class="container">
+
+    <h2>Smart Resume Analyzer</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="resume" required><br><br>
+        <textarea name="job_desc" rows="8" cols="60" placeholder="Paste Job Description"></textarea><br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if match %}
+
+        <!-- Download PDF -->
+        <a href="/download" class="download-btn">Download ATS Report (PDF)</a>
+
+        <div class="result">
+
+            <h3>Match Percentage: {{ match }}%</h3>
+            <h3>Skill Coverage: {{ skill_coverage }}%</h3>
+
+            <hr>
+
+            <h3>ATS Score: {{ ats_score }}%</h3>
+            <h3>Verdict: {{ verdict }}</h3>
+
+            <ul>
+               <li>Skills Match: {{ skill_score }}%</li>
+               <li>Projects Match: {{ project_score }}%</li>
+               <li>Experience Match: {{ experience_score }}%</li>
+           </ul>
+
+
+            <hr>
+
+            <h4>Resume Skills:</h4>
+            <div class="skills">
+                {% for s in resume_skills %}
+                    <span>{{ s }}</span>
+                {% endfor %}
+            </div>
+
+            <h4>Missing Skills:</h4>
+            <div class="skills missing">
+                {% for s in missing_skills %}
+                    <span>{{ s }}</span>
+                {% endfor %}
+            </div>
+
+        </div>
+    {% endif %}
+
+</div>
+</body>
+</html>
